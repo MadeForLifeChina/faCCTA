@@ -48,9 +48,10 @@ is as follows:
 
 ## Training
 Training is divided into three tasks, each following the same training pipeline. 
-These three tasks are Task_10001_Heart (heart segmentation), Task_10002_Coarse 
-(aorta segmentation and coarse coronary artery region extraction), and Task_10003_Fine 
-(fine-grained coronary artery and plaque extraction).
+These three tasks are 
+	- Task_10001_Heart (heart segmentation)
+	- Task_10002_Coarse (aorta segmentation and coarse coronary artery region extraction)
+	- Task_10003_Fine (fine-grained coronary artery and plaque extraction).
 
 - Step 0: Set the training data and model saving paths in the configs file.
 All training data must save as NIFTI format as nn-Unet required.
