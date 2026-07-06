@@ -89,6 +89,9 @@ predictor = init_predictor(MODEL_DIR, DEVICE)
 # Perform end-to-end inference directly from a DICOM directory
 predict_from_DICOM_dir(predictor, INPUT_DIR, OUTPUT_DIR)
 ```
+## ️ License
+
+> **Strictly for Research Use Only**
 
 ## Acknowledgement
 
