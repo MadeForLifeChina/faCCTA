@@ -1,83 +1,98 @@
 # Fully Automated Coronary Artery Analysis Algorithm
-Coronary Artery Analysis,  nn-UNet  
+
+**Keywords:** Coronary Artery Analysis, nnU-Net, faCCTA
+
+---
 
 ## Overview
-This repository provides the implementation of the faCCTA algorithm, a fully automated solution for coronary analysis. 
-It encompasses a comprehensive suite of features, including aorta and coronary artery extraction, plaque analysis, 
-stenosis assessment, and perivascular fat analysis. The algorithm is built upon [nnUnet](https://github.com/MIC-DKFZ/nnUNet) 
-and [batchgenerators](https://github.com/MIC-DKFZ/batchgenerators).
 
+This repository provides the implementation of the **faCCTA** algorithm, a fully automated solution for coronary analysis. It encompasses a comprehensive suite of features, including:
+* Aorta and coronary artery extraction
+* Plaque analysis
+* Stenosis assessment
+* Perivascular fat analysis
+
+The algorithm is built upon [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) and [batchgenerators](https://github.com/MIC-DKFZ/batchgenerators).
+
+---
 
 ## Requirements
-- PyTorch 2.0.0
-- Python 3.10
-- At least 32 GB GPU memory
-- Following packages
-    - MedPy==0.4.0
-    - nibabel==3.2.1
-    - numpy==1.24.1
-    - opencv-python==4.4.0.46
-    - pandas==2.0.3
-    - pydicom==2.1.2
-    - scikit-image==0.21.0
-    - scikit-learn==0.24.1
-    - scipy==1.10.1
-    - seaborn==0.13.0
-    - SimpleITK==2.2.1
-    - sklearn==0.0
-    - threadpoolctl==3.1.0
-    - tifffile==2023.7.10
-    - tqdm==4.53.0
-    - typing-extensions==4.3.0
-    - connected-components-3d==3.10.5
-    - openpyxl==3.1.3
 
-## Code structure
+### System & Environment
+* **OS / Environment:** Linux / Windows
+* **Python:** 3.10
+* **PyTorch:** 2.0.0
+* **Hardware:** At least 32 GB GPU memory
 
-The training code consists of two main parts: the training framework related to nnU-Net, 
-and the model design and optimization methods specific to faCCTA. The detailed code structure 
-is as follows:
+### Python Packages
+| Package | Version | Package | Version |
+| :--- | :--- | :--- | :--- |
+| `connected-components-3d` | 3.10.5 | `scikit-image` | 0.21.0 |
+| `MedPy` | 0.4.0 | `scikit-learn` | 0.24.1 |
+| `nibabel` | 3.2.1 | `scipy` | 1.10.1 |
+| `numpy` | 1.24.1 | `seaborn` | 0.13.0 |
+| `opencv-python` | 4.4.0.46 | `SimpleITK` | 2.2.1 |
+| `openpyxl` | 3.1.3 | `sklearn` | 0.0 |
+| `pandas` | 2.0.3 | `threadpoolctl` | 3.1.0 |
+| `pydicom` | 2.1.2 | `tifffile` | 2023.7.10 |
+| `tqdm` | 4.53.0 | `typing-extensions`| 4.3.0 |
 
-- acvl_utils: nnUnet-related codes,  https://github.com/MIC-DKFZ/acvl_utils
-- batchgenerators: nnUnet-related codes,  https://github.com/MIC-DKFZ/batchgenerators
-- dynamic_network_architectures: nnUnet-related codes,  https://github.com/MIC-DKFZ/dynamic-network-architectures
-- nnunet/nnunetv2: old/new version of nnUnet,  https://github.com/MIC-DKFZ/nnUNet
-- Training: codes for faCCTA training
-- Testing: codes for faCCTA testing
-- Utils: some usage of nnUnet, SimpleITK and scikit-image.
+---
+
+## Code Structure
+
+The repository consists of two main parts: the core training framework powered by nnU-Net, and the custom model design/optimization methods specific to faCCTA.
+
+* 📂 **Third-party / nnU-Net Dependencies**
+  * `acvl_utils`: nnU-Net related utilities — [GitHub](https://github.com/MIC-DKFZ/acvl_utils)
+  * `batchgenerators`: Data augmentation framework — [GitHub](https://github.com/MIC-DKFZ/batchgenerators)
+  * `dynamic_network_architectures`: Dynamic network topologies — [GitHub](https://github.com/MIC-DKFZ/dynamic-network-architectures)
+  * `nnunet/nnunetv2`: Submodules for v1 and v2 versions of nnU-Net — [GitHub](https://github.com/MIC-DKFZ/nnUNet)
+* 📂 **Core Algorithm**
+  * `Training`: Source code for faCCTA model training.
+  * `Testing`: Source code for faCCTA model inference and evaluation.
+  * `Utils`: Utility scripts leveraging nnU-Net, SimpleITK, and scikit-image.
+
+---
 
 ## Training
-Training is divided into three tasks, each following the same training pipeline. 
-These three tasks are 
-	- Task_10001_Heart (heart segmentation)
-	- Task_10002_Coarse (aorta segmentation and coarse coronary artery region extraction)
-	- Task_10003_Fine (fine-grained coronary artery and plaque extraction).
 
-- Step 0: Set the training data and model saving paths in the configs file.
-All training data must save as NIFTI format as nn-Unet required.
+### Data Preparation
+1. Before training, configure your dataset paths and model saving directories in the `configs` file.
+2. All training data **must** be saved in **NIFTI** format (`.nii.gz`), as required by nnU-Net.
 
+### Training Pipeline
+The training pipeline is divided into three sequential tasks. Each task shares a similar execution procedure:
 
-- Step 1: All  tasks share similar training procedures
-	- cd Training/Tasks/Task_XXX/
-	- python step_0_nnUNet_prepare_raw_data.py
-	- python step_1_nnUNet_planning_preprocessing.py
-	- python step_3_nnUNet_change_plan.py
-	- python step_2_nnUNet_run_training.py
+```bash
+# Navigate to the specific task directory
+cd Training/Tasks/Task_XXX/
+
+# Run the pipeline step by step
+python step_0_nnUNet_prepare_raw_data.py
+python step_1_nnUNet_planning_preprocessing.py
+python step_3_nnUNet_change_plan.py
+python step_2_nnUNet_run_training.py
+```
 
 ## Testing
 
-- After training, you can run Testing/test.py to test your own cases. 
-- You can also download our models [trained models](TBD) for testing. 
+* **Evaluate Custom Cases:** After completing the training phase, you can run `Testing/test.py` to test your own data.
+* **Pre-trained Models:** Alternatively, you can download our [Trained Models (TBD)](TBD) directly for quick testing.
 
+> 💡 **Quick Start:** Below is a simple usage example. For more detailed configurations and advanced options, please refer to `test.py`.
 
- A Simple usage is: (more details please refer to test.py)
+```python
+# Initialize the predictor with model path and target device
+predictor = init_predictor(MODEL_DIR, DEVICE)
 
-    # Init predictor
-    predictor = init_predictor(MODEL_DIR, DEVICE)
-
-    # Do Inference
-    predict_from_DICOM_dir(predictor, INPUT_DIR, OUTPUT_DIR)
+# Perform end-to-end inference directly from a DICOM directory
+predict_from_DICOM_dir(predictor, INPUT_DIR, OUTPUT_DIR)
+```
 
 ## Acknowledgement
--Thank [nnUnet](https://github.com/MIC-DKFZ/batchgenerators), [batchgenerators](https://github.com/MIC-DKFZ/batchgenerators)
 
+We sincerely thank the authors and contributors of the following open-source frameworks, which served as foundational building blocks for the development of this project:
+
+* 🚀 **[nnU-Net](https://github.com/MIC-DKFZ/nnUNet)** — A self-configuring method for deep learning-based biomedical image segmentation.
+* 📦 **[batchgenerators](https://github.com/MIC-DKFZ/batchgenerators)** — A powerful framework for 2D and 3D real-time medical image data augmentation.
