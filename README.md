@@ -1,4 +1,4 @@
-# Fully Automated Coronary Artery Analysis Algorithm
+<img width="1965" height="1595" alt="{FA46DAE1-E626-4681-B4D1-DEE0502E4788}" src="https://github.com/user-attachments/assets/cf7d8409-0e9f-4810-a263-f494dee54bb5" /># Fully Automated Coronary Artery Analysis Algorithm
 
 **Keywords:** Coronary Artery Analysis, nnU-Net, faCCTA
 
@@ -11,6 +11,12 @@ This repository provides the implementation of the **faCCTA** algorithm, a fully
 * Plaque analysis
 * Stenosis assessment
 * Perivascular fat analysis
+
+To demonstate the above analysis results, we deployed the application on AWS accessed via: [The QUANTUM Study Demo Platform](http://52.83.98.61:8000/thequantumstudy/index.html). The sample data in the demo is selected from the dataset in QUANTUM study. 
+
+<br>
+<img width="1912" height="1145" alt="CCTADemoPreview" src="https://github.com/user-attachments/assets/75ac3a52-add9-4501-99c9-04068ac8688b" />
+<br><br>
 
 The algorithm is built upon [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) and [batchgenerators](https://github.com/MIC-DKFZ/batchgenerators).
 
