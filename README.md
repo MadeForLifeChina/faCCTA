@@ -1,4 +1,4 @@
-<img width="1965" height="1595" alt="{FA46DAE1-E626-4681-B4D1-DEE0502E4788}" src="https://github.com/user-attachments/assets/cf7d8409-0e9f-4810-a263-f494dee54bb5" /># Fully Automated Coronary Artery Analysis Algorithm
+# Fully Automated Coronary Artery Analysis Algorithm
 
 **Keywords:** Coronary Artery Analysis, nnU-Net, faCCTA
 
